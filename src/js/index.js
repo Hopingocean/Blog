@@ -30,7 +30,9 @@ var router = new VueRouter({
 var app = new Vue({
   el: '#app',
   router: router,
-  data: {},
+  data: {
+    behavior: '1',
+  },
   computed: {},
   watch: {},
   methods: {},

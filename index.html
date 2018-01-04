@@ -16,7 +16,14 @@
   </div>
   <!-- header -->
   <script type="text/x-template" id="v-header-template">
-    <div class="header">
+    <div class="header" :data-behavior="behavior">
+      <router-link to="/home">主页</router-link>
+      <router-link to="/about">关于</router-link>
+    </div>
+  </script>
+  <!-- sidebar -->
+  <script type="text/x-template" id="v-sidebar-template">
+    <div class="sidebar">
       <router-link to="/home">主页</router-link>
       <router-link to="/about">关于</router-link>
     </div>
