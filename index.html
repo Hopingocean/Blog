@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lee-1258963839</title>
+  <link rel="stylesheet" href="src/css/common.css?rev=@@hash">
+  <link rel="stylesheet" href="src/css/index.css?rev=@@hash">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-header></v-header>
+    <router-view></router-view>
+    <v-footer></v-footer>
+  </div>
+  <!-- header -->
+  <script type="text/x-template" id="v-header-template">
+    <div class="header">
+      <router-link to="/home">主页</router-link>
+      <router-link to="/about">关于</router-link>
+    </div>
+  </script>
+  <!-- home -->
+  <script type="text/x-template" id="v-home-template">
+    <div class="content">
+      <p>home</p>
+    </div>
+  </script>
+  <!-- about -->
+  <script type="text/x-template" id="v-about-template">
+    <div class="content">
+      <p>about</p>
+    </div>
+  </script>
+  <!-- footer -->
+  <script type="text/x-template" id="v-footer-template">
+    <div class="footer">
+      <a href="#">www.lee12589.cn</a>
+    </div>
+  </script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+  <script src="src/js/index.js?rev=@@hash"></script>
+</body>
+</html>
