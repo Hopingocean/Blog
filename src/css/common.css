@@ -3,10 +3,68 @@ html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, blockquote, 
   padding: 0;
   font-family: "微软雅黑";
 }
-
+.icon {
+  width: 1.5em; 
+  height: 1.5em;
+  vertical-align: sub;
+  fill: currentColor;
+  overflow: hidden;
+}
+html, body, #app {
+  position: relative;
+  height: 100%;
+  clear: both;
+}
+.content {
+  padding: 20px 20px 20px 270px;
+  margin: 0 auto;
+}
+/* sidebar */
+.sidebar {
+  width: 250px;
+  height: 100%;
+  float: left;
+  text-align: center;
+  background-image: url('http://oak1q2h54.bkt.clouddn.com/blog/db.jpg');
+  background-repeat: no-repeat;
+  font-size: 16px;
+  color: #ebebeb;
+  animation: sidebarBg 15s ease-in forwards;
+}
+@keyframes sidebarBg {
+  0% {
+    background-position-x: 0;
+  }
+  50% {
+    background-position-x: 100%;
+  }
+  100% {
+    background-position-x: 50%;
+  }
+}
+@-moz-keyframes sidebarBg {
+  0% {
+    background-position-x: 0;
+  }
+  50% {
+    background-position-x: 100%;
+  }
+  100% {
+    background-position-x: 50%;
+  }
+}
+.sidebar a {
+  text-decoration: none;
+  color: #ebebeb;
+  font-size: 18px;
+  line-height: 100px;
+}
+.sidebar a:hover {
+  color: #fff;
+}
 /* header */
-.header[data-behavior="1"] {
-  display: block;
+.header {
+  display: none;
   width: 100%;
   height: 100px;
   text-align: center;
@@ -14,9 +72,15 @@ html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, blockquote, 
 }
 .header a {
   text-decoration: none;
-  color: #818181;
+  color: #ebebeb;
   font-size: 18px;
   line-height: 100px;
+}
+
+/* home */
+.home {
+  width: 100%;
+  height: auto;
 }
 
 /* footer */

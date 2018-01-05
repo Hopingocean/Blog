@@ -11,12 +11,12 @@
 <body>
   <div id="app" v-cloak>
     <v-header></v-header>
+    <v-sidebar></v-sidebar>
     <router-view></router-view>
-    <v-footer></v-footer>
   </div>
   <!-- header -->
   <script type="text/x-template" id="v-header-template">
-    <div class="header" :data-behavior="behavior">
+    <div class="header">
       <router-link to="/home">主页</router-link>
       <router-link to="/about">关于</router-link>
     </div>
@@ -24,19 +24,71 @@
   <!-- sidebar -->
   <script type="text/x-template" id="v-sidebar-template">
     <div class="sidebar">
-      <router-link to="/home">主页</router-link>
-      <router-link to="/about">关于</router-link>
+      <div class="avator">
+        <img src="http://oak1q2h54.bkt.clouddn.com/blog/lf.jpg" alt="lf">
+        <p>Lee</p>
+      </div>
+      <ul>
+        <li>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-home"></use>
+          </svg>
+          <router-link to="/home">主页</router-link>
+        </li>
+        <li>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-icon1"></use>
+          </svg>
+          <router-link to="/category">分类</router-link>
+        </li>
+        <li>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-tag"></use>
+          </svg>
+          <router-link to="/tag">标签</router-link>
+        </li>
+        <li>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-guanyu"></use>
+          </svg>
+          <router-link to="/about">关于</router-link>
+        </li>
+      </ul>
     </div>
   </script>
   <!-- home -->
   <script type="text/x-template" id="v-home-template">
-    <div class="content">
-      <p>home</p>
+    <div class="home content">
+      <ul>
+        <li v-for="(blog, i) in homeBlogList" :key="i">
+          <div class="blog__icon">
+            <img :src="blog.icon" :alt="blog.title">
+          </div>
+          <div class="blog__info">
+            <p class="blog__info--title">{{blog.title}}</p>
+            <p class="blog__info--date">{{blog.date}}</p>
+            <p class="blog__info--desc">{{blog.desc}}</p>
+            <a href="#" class="font--read">阅读全文</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </script>
+  <!-- category -->
+  <script type="text/x-template" id="v-category-template">
+    <div class="category content">
+      <p>category</p>
+    </div>
+  </script>
+  <!-- tag -->
+  <script type="text/x-template" id="v-tag-template">
+    <div class="tag content">
+      <p>tag</p>
     </div>
   </script>
   <!-- about -->
   <script type="text/x-template" id="v-about-template">
-    <div class="content">
+    <div class="about content">
       <p>about</p>
     </div>
   </script>
@@ -48,6 +100,8 @@
   </script>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+  <script src="//at.alicdn.com/t/font_532075_ozkcw90161pgmn29.js"></script>
 
   <script src="src/js/index.js?rev=@@hash"></script>
 </body>
