@@ -11,47 +11,78 @@
 <body>
   <div id="app" v-cloak>
     <v-header></v-header>
-    <v-sidebar></v-sidebar>
+    <v-sidebar @behaviorChanged="behaviorChange()" :behavior="behavior"></v-sidebar>
     <router-view></router-view>
   </div>
   <!-- header -->
   <script type="text/x-template" id="v-header-template">
     <div class="header">
-      <router-link to="/home">主页</router-link>
-      <router-link to="/about">关于</router-link>
+      <span @click="showSidebar();">
+        <svg class="icon icon-menu" aria-hidden="true">
+          <use xlink:href="#icon-menu"></use>
+        </svg>
+      </span>
+      <p class="font--name">Lee's blog</p>
+      <a class="avator">
+        <img src="http://oak1q2h54.bkt.clouddn.com/blog/lf.jpg" alt="lf">
+      </a>
     </div>
   </script>
   <!-- sidebar -->
   <script type="text/x-template" id="v-sidebar-template">
-    <div class="sidebar">
+    <div class="sidebar" :data-behavior="behavior">
       <div class="avator">
         <img src="http://oak1q2h54.bkt.clouddn.com/blog/lf.jpg" alt="lf">
         <p>Lee</p>
       </div>
       <ul>
         <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-home"></use>
-          </svg>
-          <router-link to="/home">主页</router-link>
+          <router-link to="/home">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-home"></use>
+            </svg>
+            <span class="font--title">主页</span>
+          </router-link>
         </li>
         <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon1"></use>
-          </svg>
-          <router-link to="/category">分类</router-link>
+          <router-link to="/category">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon1"></use>
+            </svg>
+            <span class="font--title">分类</span>
+          </router-link>
         </li>
         <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-tag"></use>
-          </svg>
-          <router-link to="/tag">标签</router-link>
+          <router-link to="/tag">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-tag"></use>
+            </svg>
+            <span class="font--title">标签</span>
+          </router-link>
         </li>
         <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-guanyu"></use>
-          </svg>
-          <router-link to="/about">关于</router-link>
+          <router-link to="/about">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-guanyu"></use>
+            </svg>
+            <span class="font--title">关于</span>
+          </router-link>
+        </li>
+        <li>
+          <a href="h_opingocean@outlook.com" target="_blank">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-email"></use>
+            </svg>
+            <span class="font--title">Email</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/Hopingocean" target="_blank">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github1"></use>
+            </svg>
+            <span class="font--title">GitHub</span>
+          </a>
         </li>
       </ul>
     </div>
@@ -101,7 +132,7 @@
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 
-  <script src="//at.alicdn.com/t/font_532075_ozkcw90161pgmn29.js"></script>
+  <script src="//at.alicdn.com/t/font_532075_63ssg4611p9icnmi.js"></script>
 
   <script src="src/js/index.js?rev=@@hash"></script>
 </body>
