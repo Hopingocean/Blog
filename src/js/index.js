@@ -50,12 +50,41 @@ var Home = Vue.component('v-home', {
 })
 
 // 分类
+var categoryData = {
+  categoryList: [
+    {
+      id: '#personal',
+      name: '个人总结'
+    },
+    {
+      id: '#javaScript',
+      name: 'javaScript'
+    },
+    {
+      id: '#vue',
+      name: 'Vue'
+    },
+    {
+      id: '#tips',
+      name: 'Tips'
+    },
+    {
+      id: '#life',
+      name: '生活'
+    }
+  ]
+}
 var Category = Vue.component('v-category', {
+  props: ['behavior'],
   template: '#v-category-template',
+  data: function () {
+    return categoryData;
+  }
 })
 
 // 标签
 var Tag = Vue.component('v-tag', {
+  props: ['behavior'],
   template: '#v-tag-template',
 })
 

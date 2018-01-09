@@ -106,11 +106,7 @@ html, body, #app {
   .header{
     display: none;
   }
-  .sidebar[data-behavior='1'] {
-    width: 75px;
-    height: 100%;
-  }
-  .sidebar[data-behavior='2'] {
+  .sidebar {
     width: 75px;
     height: 100%;
   }

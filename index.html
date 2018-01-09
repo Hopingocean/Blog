@@ -12,7 +12,6 @@
   <div id="app" v-cloak>
     <v-header @tochangebehavior="changeBehavior"></v-header>
     <v-sidebar :behavior="behavior"></v-sidebar>
-    <!-- <v-home :behavior="behavior"></v-home> -->
     <router-view :behavior="behavior"></router-view>
   </div>
   <!-- header -->
@@ -108,13 +107,18 @@
   </script>
   <!-- category -->
   <script type="text/x-template" id="v-category-template">
-    <div class="category content">
-      <p>category</p>
+    <div class="category content" :data-behavior="behavior">
+      <h3>搜索分类</h3>
+      <ul>
+        <li v-for="(category, i) in categoryList">
+          <a :href="category.id">{{category.name}}</a>
+        </li>
+      </ul>
     </div>
   </script>
   <!-- tag -->
   <script type="text/x-template" id="v-tag-template">
-    <div class="tag content">
+    <div class="tag content" :data-behavior="behavior">
       <p>tag</p>
     </div>
   </script>
