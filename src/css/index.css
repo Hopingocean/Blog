@@ -77,6 +77,7 @@ ul, li {
 .home .blog__info .font--read {
   font-size: 16px;
   text-decoration: none;
+  color: #e1e0a6;
 }
 
 @media screen and (min-width: 480px) {
@@ -106,12 +107,34 @@ ul, li {
 }
 
 /* 分类 */
+.content .category {
+  max-width: 750px;
+  margin: 0 auto;
+}
 .category ul li {
-  padding: 10px;
-  display: inline-block;
+  padding: 10px 0;
 }
 .category ul li a {
   text-decoration: none;
   font-size: 16px;
   color: greenyellow;
+}
+
+/* 标签 */
+.content .tag {
+  max-width: 750px;
+  margin: 0 auto;
+}
+.tag .tag__list {
+  margin-top: 20px;
+}
+.tag .tag__list a {
+  display: inline-block;
+  margin: 0 5px 5px 0;
+  font-size: 16px;
+  color: #6fb0be;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #6fb0be;
 }

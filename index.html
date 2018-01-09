@@ -10,10 +10,27 @@
 </head>
 <body>
   <div id="app" v-cloak>
-    <v-header @tochangebehavior="changeBehavior"></v-header>
-    <v-sidebar :behavior="behavior"></v-sidebar>
-    <router-view :behavior="behavior"></router-view>
+    <v-header 
+      @tochangebehavior="changeBehavior"
+      @showabout="changeToggleState">
+    </v-header>
+
+    <v-sidebar 
+      :behavior="behavior"
+      @showabout="changeToggleState"
+      :toggleabout="toggleabout">
+    </v-sidebar>
+
+    <router-view 
+      :behavior="behavior">
+    </router-view>
+
+    <v-about
+      @hideabout="changeToggleState"
+      :toggleabout="toggleabout">
+    </v-about>
   </div>
+
   <!-- header -->
   <script type="text/x-template" id="v-header-template">
     <div class="header" :data-behavior="behavior">
@@ -23,15 +40,16 @@
         </svg>
       </span>
       <p class="font--name">Lee's blog</p>
-      <a class="avator">
+      <a class="avator" @click="showAbout();">
         <img src="http://oak1q2h54.bkt.clouddn.com/blog/lf.jpg" alt="lf">
       </a>
     </div>
   </script>
+
   <!-- sidebar -->
   <script type="text/x-template" id="v-sidebar-template">
     <div class="sidebar" :data-behavior="behavior">
-      <div class="avator">
+      <div class="avator" @click="showAbout();">
         <img src="http://oak1q2h54.bkt.clouddn.com/blog/lf.jpg" alt="lf">
         <p>Lee</p>
       </div>
@@ -61,12 +79,12 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/about">
+          <a @click="showAbout();">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-guanyu"></use>
             </svg>
             <span class="font--title">关于</span>
-          </router-link>
+          </a>
         </li>
         <li>
           <a href="mailto:h_opingocean@outlook.com" target="_blank">
@@ -87,6 +105,7 @@
       </ul>
     </div>
   </script>
+
   <!-- home -->
   <script type="text/x-template" id="v-home-template">
     <div class="home content" :data-behavior="behavior">
@@ -105,35 +124,54 @@
       </ul>
     </div>
   </script>
+
   <!-- category -->
   <script type="text/x-template" id="v-category-template">
-    <div class="category content" :data-behavior="behavior">
-      <h3>搜索分类</h3>
-      <ul>
-        <li v-for="(category, i) in categoryList">
-          <a :href="category.id">{{category.name}}</a>
-        </li>
-      </ul>
+    <div class="content" :data-behavior="behavior">
+      <div class="category">
+        <h3>搜索分类</h3>
+        <ul>
+          <li v-for="(category, i) in categoryList">
+            <a :href="category.id">{{category.name}}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </script>
+
   <!-- tag -->
   <script type="text/x-template" id="v-tag-template">
-    <div class="tag content" :data-behavior="behavior">
-      <p>tag</p>
+    <div class="content" :data-behavior="behavior">
+      <div class="tag">
+        <h3>搜索标签</h3>
+        <div class="tag__list">
+          <a v-for="(tag, i) in tagList" :href="tag.id">{{tag.name}}</a>
+        </div>
+      </div>
     </div>
   </script>
+
   <!-- about -->
   <script type="text/x-template" id="v-about-template">
-    <div class="about content">
-      <p>about</p>
+    <div class="about" v-show="toggleabout" @click="hideAbout()">
+      <img src="http://oak1q2h54.bkt.clouddn.com/blog/db.jpg" alt="" class="blur about__bg">
+      <div class="dialog__box">
+        <p class="user--icon"><img :src="userinfo.icon" alt=""></p>
+        <p class="user--name">{{userinfo.name}}</p>
+        <p class="user--desc">{{userinfo.desc}}</p>
+        <p class="user--address">{{userinfo.address}}</p>
+        <p class="user--email">{{userinfo.email}}</p>
+      </div>
     </div>
   </script>
+
   <!-- footer -->
   <script type="text/x-template" id="v-footer-template">
     <div class="footer">
       <a href="#">www.lee12589.cn</a>
     </div>
   </script>
+
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 
