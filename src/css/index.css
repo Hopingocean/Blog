@@ -11,6 +11,9 @@ ul, li {
   height: auto;
   border-radius: 50%;
 }
+.sidebar ul li {
+  height: 70px;
+}
 
 /* header */
 .header {
@@ -50,6 +53,7 @@ ul, li {
 }
 .home ul li {
   position: relative;
+  border-bottom: 1px solid #cecece;
 }
 .home .blog__icon img {
   width: 100%;

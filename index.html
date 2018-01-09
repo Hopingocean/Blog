@@ -10,13 +10,14 @@
 </head>
 <body>
   <div id="app" v-cloak>
-    <v-header></v-header>
-    <v-sidebar @behaviorChanged="behaviorChange()" :behavior="behavior"></v-sidebar>
-    <router-view></router-view>
+    <v-header @tochangebehavior="changeBehavior"></v-header>
+    <v-sidebar :behavior="behavior"></v-sidebar>
+    <!-- <v-home :behavior="behavior"></v-home> -->
+    <router-view :behavior="behavior"></router-view>
   </div>
   <!-- header -->
   <script type="text/x-template" id="v-header-template">
-    <div class="header">
+    <div class="header" :data-behavior="behavior">
       <span @click="showSidebar();">
         <svg class="icon icon-menu" aria-hidden="true">
           <use xlink:href="#icon-menu"></use>
@@ -89,7 +90,7 @@
   </script>
   <!-- home -->
   <script type="text/x-template" id="v-home-template">
-    <div class="home content">
+    <div class="home content" :data-behavior="behavior">
       <ul>
         <li v-for="(blog, i) in homeBlogList" :key="i">
           <div class="blog__icon">

@@ -64,7 +64,6 @@ html, body, #app {
 }
 /* header */
 .header {
-  width: 100%;
   height: 60px;
   background-color: rgba(255, 255, 255, 0.3);
   border-bottom: 1px solid #999;
@@ -74,12 +73,6 @@ html, body, #app {
   color: #ebebeb;
   font-size: 18px;
   line-height: 100px;
-}
-
-/* home */
-.home {
-  width: 100%;
-  height: auto;
 }
 
 /* footer */
@@ -98,6 +91,7 @@ html, body, #app {
 
 @media screen and (min-width: 1024px) {
   .header {
+    width: calc(100% - 250px);
     display: none;
   }
   .sidebar {
@@ -109,10 +103,14 @@ html, body, #app {
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .header {
+  .header{
     display: none;
   }
-  .sidebar {
+  .sidebar[data-behavior='1'] {
+    width: 75px;
+    height: 100%;
+  }
+  .sidebar[data-behavior='2'] {
     width: 75px;
     height: 100%;
   }
@@ -124,13 +122,27 @@ html, body, #app {
   }
 }
 @media screen and (max-width: 767px) {
-  .header {
+  .header[data-behavior='1'] {
+    width: 100%;
     display: block;
   }
-  .sidebar {
+  .header[data-behavior='2'] {
+    width: calc(100% - 200px);
+    display: block;
+    float: right;
+  }
+  .sidebar[data-behavior='1'] {
     display: none;
   }
-  .content {
+  .sidebar[data-behavior='2'] {
+    display: block;
+    height: 100%;
+  }
+  .content[data-behavior='1'] {
     width: 100%;
+  }
+  .content[data-behavior='2'] {
+    width: calc(100% - 200px);
+    overflow: hidden;
   }
 }
