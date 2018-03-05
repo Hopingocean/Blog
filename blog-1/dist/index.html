@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="format-detection" content="telephone=no, email=no">
+  
+  <meta name="description" itemprop="description" content="听海...">  
+  <meta itemprop="name" content="Lee's Blog">
+  <meta itemprop="image" content="http://oak1q2h54.bkt.clouddn.com/blog/lf.jpg">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- UC强制全屏 -->
+  <meta name="full-screen" content="yes">
+  <!-- QQ强制全屏 -->
+  <meta name="x5-fullscreen" content="true">
+  <meta name="browsermode" content="application">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <meta name="apple-mobile-web-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Lee">
+
+  <link rel="shortcut icon" sizes="80x79" href="http://oak1q2h54.bkt.clouddn.com/blog/lf.jpg">
+  <link class="touchIcon" rel="apple-touch-icon-precomposed" href="http://oak1q2h54.bkt.clouddn.com/blog/lf.jpg">
+  <title>Lee-1258963839</title>
+  <link rel="stylesheet" href="/dist/57a6c74b718b251c0c97db4f83c071a2.css">
+  <link rel="stylesheet" href="/dist/ea38da2bcca9b8f5e87fb1f227112054.css">
+</head>
+<body>
+  <div id="app" v-cloak="">
+    <v-header @tochangebehavior="changeBehavior" @showabout="changeToggleState">
+    </v-header>
+
+    <v-sidebar :behavior="behavior" @showabout="changeToggleState" :toggleabout="toggleabout">
+    </v-sidebar>
+
+    <router-view :behavior="behavior">
+    </router-view>
+
+    <v-about @hideabout="changeToggleState" :toggleabout="toggleabout">
+    </v-about>
+  </div>
+
+  <!-- header -->
+  <script type="text/x-template" id="v-header-template">
+    <div class="header" :data-behavior="behavior">
+      <span @click="showSidebar();">
+        <svg class="icon icon-menu" aria-hidden="true">
+          <use xlink:href="#icon-menu"></use>
+        </svg>
+      </span>
+      <p class="font--name">Lee's blog</p>
+      <a class="avator" @click="showAbout();">
+        <img src="http://oak1q2h54.bkt.clouddn.com/blog/lf.jpg" alt="lf">
+      </a>
+    </div>
+  </script>
+
+  <!-- sidebar -->
+  <script type="text/x-template" id="v-sidebar-template">
+    <div class="sidebar" :data-behavior="behavior">
+      <div class="avator" @click="showAbout();">
+        <img src="http://oak1q2h54.bkt.clouddn.com/blog/lf.jpg" alt="lf">
+        <p>Lee</p>
+      </div>
+      <ul>
+        <li>
+          <router-link to="/home">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-home"></use>
+            </svg>
+            <span class="font--title">主页</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/category">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon1"></use>
+            </svg>
+            <span class="font--title">分类</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/tag">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-tag"></use>
+            </svg>
+            <span class="font--title">标签</span>
+          </router-link>
+        </li>
+        <li>
+          <a @click="showAbout();">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-guanyu"></use>
+            </svg>
+            <span class="font--title">关于</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:h_opingocean@outlook.com" target="_blank">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-email"></use>
+            </svg>
+            <span class="font--title">Email</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/Hopingocean" target="_blank">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github1"></use>
+            </svg>
+            <span class="font--title">GitHub</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </script>
+
+  <!-- home -->
+  <script type="text/x-template" id="v-home-template">
+    <div class="home content" :data-behavior="behavior">
+      <ul>
+        <li v-for="(blog, i) in homeBlogList" :key="i">
+          <div class="blog__icon">
+            <img :src="blog.icon" :alt="blog.title">
+          </div>
+          <div class="blog__info">
+            <p class="blog__info--title">{{blog.title}}</p>
+            <p class="blog__info--date">{{blog.date}}</p>
+            <p class="blog__info--desc">{{blog.desc}}</p>
+            <a href="#" class="font--read">阅读全文</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </script>
+
+  <!-- category -->
+  <script type="text/x-template" id="v-category-template">
+    <div class="content" :data-behavior="behavior">
+      <div class="category">
+        <h3>搜索分类</h3>
+        <ul>
+          <li v-for="(category, i) in categoryList">
+            <a :href="category.id">{{category.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </script>
+
+  <!-- tag -->
+  <script type="text/x-template" id="v-tag-template">
+    <div class="content" :data-behavior="behavior">
+      <div class="tag">
+        <h3>搜索标签</h3>
+        <div class="tag__list">
+          <a v-for="(tag, i) in tagList" :href="tag.id">{{tag.name}}</a>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <!-- about -->
+  <script type="text/x-template" id="v-about-template">
+    <div class="about" v-show="toggleabout" @click="hideAbout()">
+      <img src="http://oak1q2h54.bkt.clouddn.com/blog/db.jpg" alt="" class="blur about__bg">
+      <div class="dialog__box">
+        <p class="user--icon"><img :src="userinfo.icon" alt=""></p>
+        <p class="user--name">{{userinfo.name}}</p>
+        <p class="user--desc">{{userinfo.desc}}</p>
+        <p class="user--address">{{userinfo.address}}</p>
+        <p class="user--email">{{userinfo.email}}</p>
+      </div>
+    </div>
+  </script>
+
+  <!-- footer -->
+  <script type="text/x-template" id="v-footer-template">
+    <div class="footer">
+      <a href="#">www.lee12589.cn</a>
+    </div>
+  </script>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+  <script src="//at.alicdn.com/t/font_532075_63ssg4611p9icnmi.js"></script>
+
+  <script src="/dist/4c9c2859409e0886af86d65db6234bf0.js"></script>
+</body>
+</html>
