@@ -1,0 +1,598 @@
+<!--
+    Powered By nodeppt - This is probably the best web presentation tool so far!
+    version: 1.4.5
+    site: https://github.com/ksky521/nodeppt
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PETER - By PETER</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1><small>演讲者：袁梦杰</small></h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>互联网安全基础</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>加密算法</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>BASE64</h2>
+<ul>
+<li>效率高</li>
+<li>防止明文，可逆,信封</li>
+<li>长度增加4/3</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<p class="rollIn"><span><img src = './imgs/base64.jpg' /> <span></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>散列算法</h2>
+<ul>
+<li>MD5</li>
+<li>SHA1</li>
+<li><strong>SHA2</strong>（SHA-224、SHA-256、SHA-384、SHA-512、SHA-512/224、SHA-512/256）</li>
+<li>SHA3</li>
+<li>摘要,散列算法</li>
+<li>单向函数，不可逆</li>
+<li>指纹签名</li>
+<li>防明文（密码等）</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<img src = './imgs/md5.jpg' />
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<pre><code>for each 512-bit chunk of message
+    break chunk into sixteen 32-bit little-endian words w[i], 0 ≤ i ≤ 15
+
+    //Initialize hash value for this chunk:
+    var int a := h0
+    var int b := h1
+    var int c := h2
+    var int d := h3
+
+    //Main loop:
+    for i from 0 to 63
+        if 0 ≤ i ≤ 15 then
+            f := (b and c) or ((not b) and d)
+            g := i
+        else if 16 ≤ i ≤ 31
+            f := (d and b) or ((not d) and c)
+            g := (5×i + 1) mod 16
+        else if 32 ≤ i ≤ 47
+            f := b xor c xor d
+            g := (3×i + 5) mod 16
+        else if 48 ≤ i ≤ 63
+            f := c xor (b or (not d))
+            g := (7×i) mod 16
+
+        temp := d
+        d := c
+        c := b
+        b := leftrotate((a + f + k[i] + w[g]),r[i]) + b
+        a := temp
+    Next i
+    //Add this chunk&#39;s hash to result so far:
+    h0 := h0 + a
+    h1 := h1 + b
+    h2 := h2 + c
+    h3 := h3 + d
+End ForEach
+</code></pre>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>DES，3DES,AES</h2>
+<ul>
+<li>对称加密</li>
+<li>算法公开、计算量小、加密效率高。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>AES</h2>
+<ul>
+<li>AddRoundKey—矩阵中的每一个字节都与该次回合密钥（round key）做XOR运算；每个子密钥由密钥生成方案产生。</li>
+<li>SubBytes—通过一个非线性的替换函数，用查找表的方式把每个字节替换成对应的字节。</li>
+<li>ShiftRows—将矩阵中的每个横列进行循环式移位。</li>
+<li>MixColumns—为了充分混合矩阵中各个直行的操作。这个步骤使用线性转换来混合每内联的四个字节。最后一个加密循环中省略MixColumns步骤，而以另一个AddRoundKey取代。</li>
+</ul>
+<p>link: <a href="https://zh.wikipedia.org/wiki/%E9%AB%98%E7%BA%A7%E5%8A%A0%E5%AF%86%E6%A0%87%E5%87%86" target="_blank">https://zh.wikipedia.org/wiki/%E9%AB%98%E7%BA%A7%E5%8A%A0%E5%AF%86%E6%A0%87%E5%87%86</a></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>RSA</h2>
+<ul class="rollIn">
+<li>非对称加密算法</li>
+<li>效率低下</li>
+<li>私钥、公钥</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>数学原理</h1>
+<ul>
+<li>互质数</li>
+<li><p>欧拉函数，欧拉定理
+<img src = './imgs/oula.png' /></p>
+</li>
+<li><p>模反元素
+<img src = './imgs/mufan.png' /></p>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<ul>
+<li>公开密钥n、e的生成：随机选取两个质数p1、p2，n=p1*p2，再随机选取一个整数e，e与φ(n)互质。</li>
+<li><p>加密
+(m^e) mod n=c，其中m为原信息，c为加密信息，n、e为公开密钥</p>
+</li>
+<li><p>解密
+(c^d) mod n=m</p>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<blockquote>
+<p>这种算法非常可靠，密钥越长，它就越难破解。根据已经披露的文献，目前被破解的最长RSA密钥是768个二进制位。也就是说，长度超过768位的密钥，还无法破解（至少没人公开宣布）。因此可以认为，1024位的RSA密钥基本安全，2048位的密钥极其安全。</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>情景一</h2>
+<blockquote>
+<p class="rollIn"><span>小明拥有公钥和私钥。小红给小明写情书，用公钥加密。这封信只有小明能看，反之亦然。<span></p>
+</blockquote>
+<h2>情景二</h2>
+<blockquote>
+<p class="rollIn"><span>小明给小红写信，加上了一个签名，生成信件的摘要（digest),摘要用私钥加密，小红可以用公钥打开摘要，可以查看信件是否被篡改。<span></p>
+</blockquote>
+<h2>情景三</h2>
+<blockquote>
+<p class="rollIn"><span>小刚很嫉妒，偷偷在小红电脑上，用自己的公钥替换了小明的公钥，小刚就能偷偷给小红写信了，而小明的信件送不到小红手上。......直到小明去申请了一个证书。<span></p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>CA，证书</h1>
+<p> X.509 标准证书</p>
+<ul>
+<li>csr</li>
+<li>p12(pkcs)</li>
+<li>pem</li>
+<li>der</li>
+<li>crt</li>
+<li>cer</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<img src = './imgs/ca.png' />
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>HTTPS</h1>
+<ul class="rollIn">
+<li>对称算法传输数据</li>
+<li>非堆成加密key</li>
+<li>不是银弹</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>数字签名</h1>
+<ul>
+<li><p>摘要算法 + 非对称算法</p>
+</li>
+<li><p>约定token  ---
+sign = base64（content + token）
+sign = md5(base64（content + token） + token)</p>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>认证和会话</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>几个概念</h2>
+
+</hgroup><article>
+
+<ul class="rollIn">
+<li>认证：认出用户是谁</li>
+<li>授权：决定用户能做什么。</li>
+<li>凭证：达到认证目的。</li>
+<li>Authentication  Authorization Credential</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<blockquote>
+<p>有一间屋子，持有钥匙的人可以开门进入屋子。</p>
+</blockquote>
+<ul class="rollIn">
+<li><p>认证：开门的过程就是认证的过程</p>
+</li>
+<li><p>授权：干啥都行～</p>
+</li>
+<li><p>凭证：钥匙。</p>
+<p>被用于认证,开门的过程，对应互联网中的登陆</p>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<blockquote>
+<p>持有钥匙的人就是主人吗？</p>
+<p>钥匙会丢</p>
+<p>有人造了一吧同样的钥匙</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<blockquote>
+<p>安全本质是信任的问题</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>认证</h1>
+<blockquote>
+<p>认证就是验证凭证的过程</p>
+</blockquote>
+<ul class="rollIn">
+<li>单因素凭证</li>
+<li>双因素凭证</li>
+<li>多因素凭证</li>
+</ul>
+
+</hgroup><article>
+
+<ul class="rollIn">
+<li>多因素凭证 vs 用户体验</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>授权</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>session使用方式</h1>
+<ul>
+<li>每次传输账号密码</li>
+<li>session 加密 &gt; cookie</li>
+<li>session 保存在服务端 ，sid-&gt; cookie</li>
+<li><em>保存在url</em>（sid）</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>session 攻击</h1>
+<ul class="rollIn">
+<li>session fixation</li>
+<li>session保持攻击</li>
+<li>xss</li>
+<li>crsf</li>
+<li>arp欺骗</li>
+<li>伪装CA</li>
+<li>。。。。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>session安全策略</h1>
+<ul class="rollIn">
+<li>session过期</li>
+<li>单点</li>
+<li>ip、ua等变化了，强制销毁等</li>
+<li>多因素凭证</li>
+<li>浏览器指纹</li>
+<li>。。。。。。。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>OAuth</h1>
+<p>略</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>安全世界观，安全三要素</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<ul class="rollIn">
+<li>Confidentiality--机密性</li>
+<li>数据内容不能泄漏，加密是实现机密性的常见手段</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<ul class="rollIn">
+<li>Integrity--完整性</li>
+<li>数据内容不能泄漏，加密是实现机密性的常见手段</li>
+<li>类比信封，封面等</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<ul class="rollIn">
+<li>Integrity--完整性</li>
+<li>保护数据内容是完整的，没有被篡改的，常见的手段是数字签名</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<ul class="rollIn">
+<li>Availability--可用性</li>
+<li>保护资源的可用性，随需要可得，随需要扩展。</li>
+<li>eg:停车场,DDOS,CC等</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<blockquote>
+<p>安全三要素，是设计安全方案时的三个基本出发点</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<ul class="rollIn">
+<li>可审计性</li>
+<li>不可抵赖性</li>
+<li>运维监控</li>
+<li>保险</li>
+<li>权限</li>
+<li>人员掌控</li>
+<li>等等</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>安全评估</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<p>资产划分-&gt;威胁分析-&gt;风险分析-&gt;确认解决方案</p>
+<p class="rollIn"><span>面对一个尚未评估的系统，上一个阶段将决定下一个阶段的目标，需要实施到什么程度。<span></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h3>资产划分</h3>
+<ul class="rollIn">
+<li>固定资产(服务器、网络、数据库、中间件等)</li>
+<li>数据</li>
+</ul>
+<p class="rollIn"><span>划分信任边界！<span></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h3>威胁分析</h3>
+<p>STRIDE</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">威胁</th>
+<th style="text-align:left">定义</th>
+<th style="text-align:left">安全属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Spoofing--伪装</td>
+<td style="text-align:left">冒充他人身份</td>
+<td style="text-align:left">认证</td>
+</tr>
+<tr>
+<td style="text-align:left">Tampering--篡改</td>
+<td style="text-align:left">修改数据或代码</td>
+<td style="text-align:left">完整性</td>
+</tr>
+<tr>
+<td style="text-align:left">Repudiation--抵赖</td>
+<td style="text-align:left">否认做过的事情</td>
+<td style="text-align:left">不可抵赖性</td>
+</tr>
+<tr>
+<td style="text-align:left">InformationDisclosure--信息泄漏</td>
+<td style="text-align:left">机密信息泄漏</td>
+<td style="text-align:left">机密性</td>
+</tr>
+<tr>
+<td style="text-align:left">Denial of service--拒绝服务</td>
+<td style="text-align:left">拒绝服务</td>
+<td style="text-align:left">可用性</td>
+</tr>
+<tr>
+<td style="text-align:left">Elevation of Privilege--提升权限</td>
+<td style="text-align:left">未经许可获得许可</td>
+<td style="text-align:left">授权</td>
+</tr>
+</tbody>
+</table>
+<p class="rollIn"><span>没有预测到的风险  <span></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h3>风险分析</h3>
+<p>Risk = Probability * Damage Potential</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">等级</th>
+<th style="text-align:left">高3</th>
+<th style="text-align:left">中2</th>
+<th style="text-align:left">低1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Damage Potential</td>
+<td style="text-align:left">获取完全验证权限；执行管理员操作；非法上传文件等</td>
+<td style="text-align:left">泄漏敏感信息</td>
+<td style="text-align:left">泄漏其他信息</td>
+</tr>
+<tr>
+<td style="text-align:left">Reproducibility</td>
+<td style="text-align:left">攻击者可随意再次攻击</td>
+<td style="text-align:left">攻击者可以重复攻击，但有时间限制</td>
+<td style="text-align:left">攻击者很难重复攻击过程</td>
+</tr>
+<tr>
+<td style="text-align:left">Exploitability</td>
+<td style="text-align:left">初学者在短期内能掌握攻击方法</td>
+<td style="text-align:left">熟练的攻击者</td>
+<td style="text-align:left">漏洞利用条件苛刻</td>
+</tr>
+<tr>
+<td style="text-align:left">Affected user</td>
+<td style="text-align:left">所有用户，默认配置，关键用户</td>
+<td style="text-align:left">部分用户，非默认配置</td>
+<td style="text-align:left">极少数用户，匿名用户</td>
+</tr>
+<tr>
+<td style="text-align:left">Discoverability</td>
+<td style="text-align:left">漏洞明显，攻击条件容易</td>
+<td style="text-align:left">私有区域，部分人能看到</td>
+<td style="text-align:left">发现漏洞条件苛刻</td>
+</tr>
+</tbody>
+</table>
+<p>高危：12～15
+中危：8～11
+低危：0～7</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h3>确认方案</h3>
+<p>安全是产品的一种属性</p>
+<ul>
+<li>能够有效解决问题；{:&amp;.rollIn}</li>
+<li>用户体验好；</li>
+<li>高性能；</li>
+<li>低耦合</li>
+<li>易于扩展和升级。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>owasp评估法</h2>
+<p>OWASP：<a href="http://www.owasp.org.cn/owasp-project/download/OWASPRiskRatingMethodologyV2.pdf" target="_blank">http://www.owasp.org.cn/owasp-project/download/OWASPRiskRatingMethodologyV2.pdf</a></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<p>完</p>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodeppt v1.4.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+    var ASSET_RELATIVE_DIR = ".";
+</script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+if (typeof ASSET_RELATIVE_DIR === 'string') {
+    path = path + '/' + ASSET_RELATIVE_DIR;
+}
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script src="./js/demo.js"></script>
+<link rel="stylesheet" href="./css/demo.css">
+<script src="./js/zoom.js"></script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  config: ["TeX-AMS-MML_HTMLorMML.js"],
+  tex2jax: {inlineMath: [['\\(','\\)']]}});
+  //['$','$'], 避免货币价格冲突
+</script>
+<script type="text/javascript" src="./js/mathjax/MathJax.js"></script>
+
+<!--placeholder-->
+</body>
+</html>
