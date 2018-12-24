@@ -1,0 +1,309 @@
+<!--
+    Powered By nodeppt - This is probably the best web presentation tool so far!
+    version: 1.4.5
+    site: https://github.com/ksky521/nodeppt
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PETER - By PETER</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1><small>演讲者：袁梦杰</small></h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>JSON</h1>
+<blockquote class="rollIn">
+<p>JSON(JavaScript Object Notation, JS 对象简谱) 是一种轻量级的数据交换格式</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>PROFOBUF</h1>
+<blockquote class="rollIn">
+<p>Protocol Buffers是一种序列化数据结构的协议。对于透过管线(pipeline)或存储数据进行通信的程序开发上是很有用的。这个方法包含一个接口描述语言，描述一些数据结构，并提供程序工具根据这些描述产生代码，用于将这些数据结构产生或解析数据流。</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>知识</h1>
+<p>&gt;</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>JSON&amp;PB 编码长度对比</h1>
+<h2>JSON</h2>
+<blockquote class="rollIn">
+<p>{&quot;red_point&quot;:18}  </p>
+</blockquote>
+<h2>PB</h2>
+<blockquote class="rollIn">
+<p>08 24    </p>
+</blockquote>
+<ul class="rollIn">
+<li>16 vs 2 </li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>JSON&amp;PB 编码长度对比</h1>
+<h2>JSON</h2>
+<blockquote class="rollIn">
+<p>{&quot;red_point&quot;:18,&quot;award&quot;:[1,2,3],&quot;num&quot;:132.215}</p>
+</blockquote>
+<h2>PB</h2>
+<blockquote class="rollIn">
+<p>28 02 28 04 28 06 25 0A 37 04 43 08 24 </p>
+</blockquote>
+<ul class="rollIn">
+<li>46 vs 13 </li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>JSON&amp;PB 解析速度对比</h1>
+<img src = './imgs/25f1bae21fbf4f70b0c937767db9e9df_th.jpeg' />
+<blockquote>
+<p><a href="https://www.sohu.com/a/136487507_505779" target="_blank">https://www.sohu.com/a/136487507_505779</a></p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>proto文件示例</h1>
+<pre><code>{
+    &quot;reward_item_ids&quot;:[1,2,3],
+    &quot;reward_item_nums&quot;:[100,200,300]
+}
+</code></pre><pre><code>syntax = &quot;proto2&quot;;
+
+
+message s2c_14030 {
+    repeated sint32 reward_item_ids = 1;
+    repeated sint32 reward_item_nums = 2;
+}
+</code></pre>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>proto文件示例</h1>
+<pre><code>syntax = &quot;proto2&quot;;
+
+
+ message SkillData {
+     required sint32 id = 1;
+     required sint32 lv = 2;
+     required sint32 t = 3;
+ }
+
+ message MapSkills {
+     map&lt;string, Skill&gt; list = 1;
+ }
+
+ message Skill {
+     required sint32 id = 1;
+     required sint32 status = 2;
+ }
+
+
+ message s2c_13015 {
+     repeated SkillData battery_skills = 1;
+     map&lt;string, MapSkills&gt; passive_skills = 2;
+     map&lt;string, MapSkills&gt; talent_skills = 3;
+ }
+</code></pre>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>编码原理</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>varint</h1>
+<img src = './imgs/image006.jpg'  />
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>key-value</h1>
+<img src = './imgs/image007.jpg'  />
+<pre><code>Type    Meaning    Used For
+0    Varint    int32, int64, uint32, uint64, sint32, sint64, bool, enum
+1    64-bit    fixed64, sfixed64, double
+2    Length-delimi    string, bytes, embedded messages, packed repeated fields
+3    Start group    Groups (deprecated)
+4    End group    Groups (deprecated)
+5    32-bit    fixed32, sfixed32, float
+</code></pre><ul>
+<li>key</li>
+</ul>
+<blockquote>
+<p>Key 的定义
+ (field_number &lt;&lt; 3) | wire_type</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Zigzag 编码</h1>
+<img src = './imgs/image008.jpg'  />
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>官方编译器的问题</h1>
+<ul class="rollIn">
+<li>不支持AS3，LUA </li>
+<li>JS有反射代码，小游戏不支持</li>
+<li>自动修改变量风格， eg:user_name -&gt; userName</li>
+<li>代码有冗余</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>解决方案</h1>
+<h2>lua</h2>
+<blockquote>
+<p><a href="https://github.com/starwing/lua-protobuf" target="_blank">https://github.com/starwing/lua-protobuf</a></p>
+</blockquote>
+<h2>as3</h2>
+<blockquote>
+<p>tool/tool/proto ，基于protobuf2，PY版本的 parser</p>
+</blockquote>
+<p>支持玩一玩、浏览器、小游戏等环境</p>
+<p>protobuf2特性，目前支持不完全</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>工具使用</h1>
+<ul>
+<li>安装官方protoc</li>
+<li>proto.py脚本</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>项目使用收益</h1>
+<ul class="rollIn">
+<li>预计减少流量（60%以上），增加单机用户负载量 </li>
+<li>减小配表体积 （60%以上）</li>
+<li>增加封接包速度 （？）</li>
+<li>增加协议代码的可读性，增加IDE代码提示</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>剩余的工作</h1>
+<ul class="rollIn">
+<li>完善protobuf2特性（关键字、上行流量） </li>
+<li>改造协议</li>
+<li>优化as protobuf库（reader、decoder对象池）</li>
+<li>测试</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>在后端通信中的应用</h1>
+<ul class="rollIn">
+<li>lua &lt;-&gt; php </li>
+<li>前端 &lt;-&gt; php</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>谢谢</h1>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodeppt v1.4.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+    var ASSET_RELATIVE_DIR = ".";
+</script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+if (typeof ASSET_RELATIVE_DIR === 'string') {
+    path = path + '/' + ASSET_RELATIVE_DIR;
+}
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script src="./js/demo.js"></script>
+<link rel="stylesheet" href="./css/demo.css">
+<script src="./js/zoom.js"></script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  config: ["TeX-AMS-MML_HTMLorMML.js"],
+  tex2jax: {inlineMath: [['\\(','\\)']]}});
+  //['$','$'], 避免货币价格冲突
+</script>
+<script type="text/javascript" src="./js/mathjax/MathJax.js"></script>
+
+<!--placeholder-->
+</body>
+</html>
